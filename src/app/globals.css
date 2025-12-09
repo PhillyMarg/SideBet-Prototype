@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+  --background: #18181B;
+  --foreground: #FFFFFF;
+  --accent-orange: #ff6b35;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: "Montserrat", sans-serif;
+  min-height: 100vh;
+}
+
+/* Text shadow utility for all auth text */
+.text-shadow {
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Gradient background for auth pages */
+.auth-gradient {
+  background: linear-gradient(to bottom, #18181B 0%, #18181B 40%, rgba(255, 107, 53, 0.3) 100%);
+  min-height: 100vh;
+}
+
+/* Input glow effect */
+.input-glow {
+  box-shadow: 2px 2px 4px 0px #ff6b35;
+}
+
+/* Custom scrollbar for mobile feel */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+/* Focus styles */
+input:focus {
+  outline: none;
+}
+
+/* Disable input autofill background */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px rgba(24, 24, 27, 0.4) inset, 2px 2px 4px 0px #ff6b35;
+  -webkit-text-fill-color: #FFFFFF;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
