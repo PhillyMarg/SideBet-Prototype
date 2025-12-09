@@ -94,6 +94,13 @@ export async function signOut(): Promise<void> {
   await firebaseSignOut(auth);
 }
 
+// Helper to remove undefined values from an object
+function removeUndefinedFields<T extends Record<string, unknown>>(obj: T): Partial<T> {
+  return Object.fromEntries(
+    Object.entries(obj).filter(([, value]) => value !== undefined)
+  ) as Partial<T>;
+}
+
 // Firestore User Profile Functions
 export async function createUserProfile(
   user: User,
@@ -102,7 +109,7 @@ export async function createUserProfile(
 ): Promise<void> {
   const userRef = doc(db, "users", user.uid);
 
-  const profileData: UserProfile = {
+  const profileData = removeUndefinedFields({
     uid: user.uid,
     email: user.email || "",
     displayName: additionalData?.displayName || user.displayName || "",
@@ -110,7 +117,7 @@ export async function createUserProfile(
     venmoUsername: additionalData?.venmoUsername || undefined,
     authProvider: provider,
     createdAt: serverTimestamp() as Timestamp,
-  };
+  });
 
   await setDoc(userRef, profileData);
 }
@@ -131,7 +138,8 @@ export async function updateUserProfile(
   data: Partial<UserProfile>
 ): Promise<void> {
   const userRef = doc(db, "users", uid);
-  await updateDoc(userRef, data);
+  const cleanedData = removeUndefinedFields(data as Record<string, unknown>);
+  await updateDoc(userRef, cleanedData);
 }
 
 export async function checkUserExists(uid: string): Promise<boolean> {

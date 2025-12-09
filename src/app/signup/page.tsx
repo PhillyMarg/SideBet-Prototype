@@ -125,8 +125,8 @@ export default function SignUpPage() {
         </h1>
 
         {/* Tagline */}
-        <p className="mt-[12px] text-white text-[20px] font-light italic text-shadow">
-          Put Your Money Where Your Mouth Is.
+        <p className="mt-[12px] text-white text-[20px] font-light italic text-shadow text-center">
+          Every Party Needs Stakes.
         </p>
 
         {/* Social Buttons */}
