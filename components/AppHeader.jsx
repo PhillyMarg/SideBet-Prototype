@@ -1,3 +1,4 @@
+@'
 'use client';
 
 import { Bell } from 'lucide-react';
@@ -8,7 +9,6 @@ export default function AppHeader({ username = 'User', notificationCount = 0 }) 
 
   return (
     <header className="flex items-center justify-between px-4 py-4">
-      {/* Logo */}
       <div className="flex items-center gap-2">
         <div className="w-7 h-7 bg-[#f37736] rounded flex items-center justify-center">
           <span className="text-white font-bold text-sm">S</span>
@@ -16,7 +16,6 @@ export default function AppHeader({ username = 'User', notificationCount = 0 }) 
         <span className="font-bold text-sm tracking-wide">SIDEBET</span>
       </div>
 
-      {/* Right side */}
       <div className="flex items-center gap-3">
         <span className="text-[#A1A1AA] text-xs">{username}</span>
         <button
@@ -34,3 +33,4 @@ export default function AppHeader({ username = 'User', notificationCount = 0 }) 
     </header>
   );
 }
+'@ | Out-File -FilePath "C:\Users\Phil\Documents\SideBet-Prototype\components\AppHeader.jsx" -Encoding UTF8
