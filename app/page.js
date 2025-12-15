@@ -25,7 +25,6 @@ export default function Home() {
           onChange={setSearchQuery}
         />
 
-        {/* Placeholder for bet cards */}
         <div className="px-4 pt-4">
           <p className="text-[#A1A1AA] text-sm italic text-center py-8">
             No Active Bets. Create One, Chump!
