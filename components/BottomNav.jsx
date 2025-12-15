@@ -1,4 +1,3 @@
-@'
 'use client';
 
 import Link from 'next/link';
@@ -56,4 +55,3 @@ export default function BottomNav() {
     </nav>
   );
 }
-'@ | Out-File -FilePath "C:\Users\Phil\Documents\SideBet-Prototype\components\BottomNav.jsx" -Encoding UTF8

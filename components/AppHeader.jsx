@@ -1,4 +1,3 @@
-@'
 'use client';
 
 import { Bell } from 'lucide-react';
@@ -33,4 +32,3 @@ export default function AppHeader({ username = 'User', notificationCount = 0 }) 
     </header>
   );
 }
-'@ | Out-File -FilePath "C:\Users\Phil\Documents\SideBet-Prototype\components\AppHeader.jsx" -Encoding UTF8
