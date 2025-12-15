@@ -1,3 +1,4 @@
+@'
 'use client';
 
 import Link from 'next/link';
@@ -17,7 +18,6 @@ export default function BottomNav() {
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-[#18181B] z-40">
       <div className="flex items-center justify-around py-3 pb-6 max-w-md mx-auto relative">
-        {/* First two tabs */}
         {tabs.slice(0, 2).map((tab) => (
           <Link
             key={tab.href}
@@ -31,7 +31,6 @@ export default function BottomNav() {
           </Link>
         ))}
 
-        {/* Center FAB */}
         <Link
           href="/create"
           className="absolute left-1/2 -translate-x-1/2 -top-6 w-[56px] h-[56px] bg-[#f37736] rounded-full flex items-center justify-center text-white text-3xl shadow-[0_4px_12px_rgba(243,119,54,0.4)]"
@@ -39,10 +38,8 @@ export default function BottomNav() {
           +
         </Link>
 
-        {/* Spacer for FAB */}
         <div className="w-[56px]" />
 
-        {/* Last two tabs */}
         {tabs.slice(2).map((tab) => (
           <Link
             key={tab.href}
@@ -59,3 +56,4 @@ export default function BottomNav() {
     </nav>
   );
 }
+'@ | Out-File -FilePath "C:\Users\Phil\Documents\SideBet-Prototype\components\BottomNav.jsx" -Encoding UTF8
