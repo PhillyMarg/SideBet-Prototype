@@ -1,4 +1,3 @@
-@'
 import './globals.css';
 import BottomNav from '@/components/BottomNav';
 
@@ -19,4 +18,3 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-'@ | Out-File -FilePath "C:\Users\Phil\Documents\SideBet-Prototype\app\layout.js" -Encoding UTF8

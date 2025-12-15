@@ -1,4 +1,3 @@
-@'
 'use client';
 
 import { useState } from 'react';
@@ -26,7 +25,7 @@ export default function FilterPills({ onFilterChange, defaultFilter = 'all' }) {
         const isActive = active === filter.id;
         const isPurple = filter.color === 'purple';
         const baseColor = isPurple ? '#7b2cbf' : '#f37736';
-        
+
         return (
           <button
             key={filter.id}
@@ -45,4 +44,3 @@ export default function FilterPills({ onFilterChange, defaultFilter = 'all' }) {
     </div>
   );
 }
-'@ | Out-File -FilePath "C:\Users\Phil\Documents\SideBet-Prototype\components\FilterPills.jsx" -Encoding UTF8
