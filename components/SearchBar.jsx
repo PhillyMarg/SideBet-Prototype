@@ -1,7 +1,8 @@
-export default function SearchBar({
-  placeholder = 'Search...',
-  value = '',
-  onChange
+@'
+export default function SearchBar({ 
+  placeholder = 'Search...', 
+  value = '', 
+  onChange 
 }) {
   return (
     <div className="px-4">
@@ -30,3 +31,4 @@ export default function SearchBar({
     </div>
   );
 }
+'@ | Out-File -FilePath "C:\Users\Phil\Documents\SideBet-Prototype\components\SearchBar.jsx" -Encoding UTF8
