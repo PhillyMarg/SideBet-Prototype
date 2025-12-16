@@ -1,8 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --sb-orange: #ff6b35;
+  --sb-purple: #7b2cbf;
+  --sb-dark: #18181b;
+  --sb-card: rgba(24, 24, 27, 0.4);
+  --sb-nav-bg: #3D2314;
+}
 
 * {
   box-sizing: border-box;
@@ -10,24 +18,38 @@
   padding: 0;
 }
 
+html,
 body {
   font-family: 'Montserrat', sans-serif;
-  background: linear-gradient(180deg, #18181B 0%, #4a2c1a 100%);
-  min-height: 100vh;
+  background-color: var(--sb-dark);
   color: white;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-/* Hide scrollbar but keep functionality */
-.scrollbar-hide {
+/* Utility classes for glass effect */
+.glass-card {
+  background: var(--sb-card);
+  border-radius: 6px;
+}
+
+/* Text shadow for card text */
+.text-shadow {
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Hide scrollbar but allow scrolling */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
 /* Safe area padding for mobile */
-.pb-safe {
-  padding-bottom: env(safe-area-inset-bottom, 20px);
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
 }
