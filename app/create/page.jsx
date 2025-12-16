@@ -119,6 +119,11 @@ export default function CreateBet() {
 
       <div className="p-4">
         <button
+          onClick={() => {
+            if (canProceed) {
+              router.push(`/create/step2?type=${betType}&target=${selectedTarget?.id || ''}`);
+            }
+          }}
           disabled={!canProceed}
           className={`w-full py-4 rounded-lg font-semibold ${
             canProceed
