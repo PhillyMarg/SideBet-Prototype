@@ -1,4 +1,4 @@
-@'
+
 export default function SearchBar({ 
   placeholder = 'Search...', 
   value = '', 
@@ -31,4 +31,3 @@ export default function SearchBar({
     </div>
   );
 }
-'@ | Out-File -FilePath "C:\Users\Phil\Documents\SideBet-Prototype\components\SearchBar.jsx" -Encoding UTF8

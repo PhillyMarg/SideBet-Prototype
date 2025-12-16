@@ -1,4 +1,4 @@
-@'
+
 'use client';
 
 import { useState } from 'react';
@@ -35,4 +35,3 @@ export default function Home() {
     </main>
   );
 }
-'@ | Out-File -FilePath "C:\Users\Phil\Documents\SideBet-Prototype\app\page.js" -Encoding UTF8

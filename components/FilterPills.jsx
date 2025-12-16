@@ -1,4 +1,3 @@
-@'
 'use client';
 
 import { useState } from 'react';
@@ -45,4 +44,3 @@ export default function FilterPills({ onFilterChange, defaultFilter = 'all' }) {
     </div>
   );
 }
-'@ | Out-File -FilePath "C:\Users\Phil\Documents\SideBet-Prototype\components\FilterPills.jsx" -Encoding UTF8
