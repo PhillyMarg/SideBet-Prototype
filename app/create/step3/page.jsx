@@ -19,8 +19,6 @@ export default function CreateBetStep3() {
   const betType = searchParams.get('type') || 'group';
   const betFormat = searchParams.get('format') || 'yes-no';
   const title = searchParams.get('title') || '';
-  const description = searchParams.get('description') || '';
-  const line = searchParams.get('line') || '';
 
   const isH2H = betType === 'h2h';
   const accentColor = isH2H ? '#7b2cbf' : '#f37736';
@@ -29,6 +27,7 @@ export default function CreateBetStep3() {
   const [customWager, setCustomWager] = useState('');
   const [showCustomWager, setShowCustomWager] = useState(false);
   const [timePreset, setTimePreset] = useState(60);
+  const [showCustomTime, setShowCustomTime] = useState(false);
 
   const finalWager = showCustomWager ? Number(customWager) || 0 : wager;
   const canProceed = finalWager > 0;
@@ -36,7 +35,6 @@ export default function CreateBetStep3() {
   const handleWagerSelect = (amount) => {
     setWager(amount);
     setShowCustomWager(false);
-    setCustomWager('');
   };
 
   const handlePlaceBet = () => {
@@ -45,125 +43,131 @@ export default function CreateBetStep3() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <div className="px-4 py-4">
-        <div className="flex justify-between items-center mb-2">
-          <span className="text-[11px] text-[#A1A1AA]">Step 3 of 3</span>
-          <button onClick={() => router.push('/')}>
-            <X size={20} className="text-[#A1A1AA]" />
-          </button>
-        </div>
-        <div className="h-[3px] bg-[#444444] rounded-full">
+    <div className="min-h-screen flex items-center justify-center p-4">
+      <div className="w-full max-w-[340px] bg-[#1a1a1a] border border-[#333] rounded-xl p-5 relative">
+        {/* Progress bar */}
+        <div className="h-[3px] bg-[#333] rounded-full mb-4">
           <div className="h-full w-full rounded-full" style={{ backgroundColor: accentColor }} />
         </div>
-      </div>
 
-      <div className="flex-1 px-4 overflow-y-auto">
+        {/* Close button */}
+        <button
+          onClick={() => router.push('/')}
+          className="absolute top-4 right-4 text-[#666]"
+        >
+          <X size={18} />
+        </button>
+
         <h1 className="text-lg font-semibold mb-1">Set the Stakes!</h1>
-        <p className="text-sm text-[#A1A1AA] mb-6">How much and how long?</p>
+        <p className="text-sm text-[#888] mb-4">Wager Amount*</p>
 
-        <div className="mb-6">
-          <label className="text-[11px] text-[#A1A1AA] uppercase tracking-wide mb-2 block">
-            Wager Amount
-          </label>
-          <div className="flex flex-wrap gap-2">
-            {WAGER_PRESETS.map((amount) => (
-              <button
-                key={amount}
-                onClick={() => handleWagerSelect(amount)}
-                style={{
-                  backgroundColor: wager === amount && !showCustomWager ? accentColor : 'transparent',
-                  borderColor: accentColor,
-                }}
-                className="px-4 py-2 rounded-lg text-sm font-semibold border min-w-[60px]"
-              >
-                ${amount}
-              </button>
-            ))}
+        {/* Wager Grid */}
+        <div className="grid grid-cols-3 gap-2 mb-3">
+          {WAGER_PRESETS.map((amount) => (
             <button
-              onClick={() => { setShowCustomWager(true); setWager(0); }}
+              key={amount}
+              onClick={() => handleWagerSelect(amount)}
               style={{
-                backgroundColor: showCustomWager ? accentColor : 'transparent',
+                backgroundColor: wager === amount && !showCustomWager ? accentColor : 'transparent',
                 borderColor: accentColor,
               }}
-              className="px-4 py-2 rounded-lg text-sm font-semibold border"
+              className="py-2 rounded-lg text-sm font-semibold border"
             >
-              Custom
+              ${amount}
             </button>
-          </div>
-          {showCustomWager && (
-            <input
-              type="number"
-              value={customWager}
-              onChange={(e) => setCustomWager(e.target.value)}
-              placeholder="Enter amount"
-              className="w-full mt-3 p-4 rounded-lg border border-[#444444] bg-transparent text-white placeholder-[#666666] focus:outline-none"
-              style={{ borderColor: accentColor }}
-            />
-          )}
-        </div>
-
-        <div className="mb-6">
-          <label className="text-[11px] text-[#A1A1AA] uppercase tracking-wide mb-2 block">
-            Voting Window
-          </label>
-          <div className="flex flex-wrap gap-2">
-            {TIME_PRESETS.map((preset) => (
-              <button
-                key={preset.value}
-                onClick={() => setTimePreset(preset.value)}
-                style={{
-                  backgroundColor: timePreset === preset.value ? accentColor : 'transparent',
-                  borderColor: accentColor,
-                }}
-                className="px-4 py-2 rounded-lg text-sm font-semibold border min-w-[60px]"
-              >
-                {preset.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="mb-4">
-          <label className="text-[11px] text-[#A1A1AA] uppercase tracking-wide mb-2 block">
-            Preview
-          </label>
-          <div
-            className="p-4 rounded-lg border"
-            style={{ borderColor: accentColor, backgroundColor: `${accentColor}10` }}
+          ))}
+          <button
+            onClick={() => { setShowCustomWager(true); setWager(0); }}
+            style={{
+              backgroundColor: showCustomWager ? accentColor : 'transparent',
+              borderColor: accentColor,
+            }}
+            className="py-2 rounded-lg text-sm font-semibold border"
           >
-            <div className="text-xs mb-1" style={{ color: accentColor }}>
-              {isH2H ? 'H2H Challenge' : 'Group Bet'}
-            </div>
-            <div className="text-sm font-medium text-white mb-2">{title || 'Bet Title'}</div>
-            {description && (
-              <div className="text-xs text-[#A1A1AA] mb-2 italic">{description}</div>
-            )}
-            {betFormat === 'over-under' && line && (
-              <div className="text-xs text-[#A1A1AA] mb-2">Line: {line}</div>
-            )}
-            <div className="text-xs" style={{ color: accentColor }}>
-              Wager: ${finalWager.toFixed(2)} | {TIME_PRESETS.find(t => t.value === timePreset)?.label || 'Custom'}
-            </div>
+            Custom
+          </button>
+        </div>
+
+        {showCustomWager && (
+          <input
+            type="number"
+            value={customWager}
+            onChange={(e) => setCustomWager(e.target.value)}
+            placeholder="$12.00"
+            className="w-full p-3 rounded-lg border border-[#444] bg-transparent text-white placeholder-[#666] focus:outline-none text-sm mb-4"
+          />
+        )}
+
+        <p className="text-sm text-[#888] mb-3 mt-4">Bet Closes*</p>
+
+        {/* Time Grid */}
+        <div className="grid grid-cols-3 gap-2 mb-4">
+          {TIME_PRESETS.map((preset) => (
+            <button
+              key={preset.value}
+              onClick={() => { setTimePreset(preset.value); setShowCustomTime(false); }}
+              style={{
+                backgroundColor: timePreset === preset.value && !showCustomTime ? accentColor : 'transparent',
+                borderColor: accentColor,
+              }}
+              className="py-2 rounded-lg text-sm font-semibold border"
+            >
+              {preset.label}
+            </button>
+          ))}
+          <button
+            onClick={() => setShowCustomTime(true)}
+            style={{
+              backgroundColor: showCustomTime ? accentColor : 'transparent',
+              borderColor: accentColor,
+            }}
+            className="py-2 rounded-lg text-sm font-semibold border"
+          >
+            Custom
+          </button>
+        </div>
+
+        {/* Preview */}
+        <p className="text-xs text-[#666] text-center mb-2">PREVIEW</p>
+        <div className="p-3 rounded-lg border border-[#333] bg-[#111] mb-4 text-xs">
+          <div className="flex justify-between mb-1">
+            <span className="text-[#666]">Group</span>
+            <span className="text-[#888]">Test Group 1</span>
+          </div>
+          <div className="flex justify-between mb-1">
+            <span className="text-[#666]">Bet</span>
+            <span className="text-[#888]">{title || 'Bet Title'}</span>
+          </div>
+          <div className="flex justify-between mb-1">
+            <span className="text-[#666]">Type</span>
+            <span className="text-[#888]">{betFormat === 'yes-no' ? 'YES/NO' : 'OVER/UNDER'}</span>
+          </div>
+          <div className="flex justify-between mb-1">
+            <span className="text-[#666]">Wager</span>
+            <span className="text-[#888]">${finalWager.toFixed(2)}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-[#666]">Closes</span>
+            <span className="text-[#888]">{TIME_PRESETS.find(t => t.value === timePreset)?.label || 'Custom'}</span>
           </div>
         </div>
-      </div>
 
-      <div className="p-4 flex gap-3">
-        <button
-          onClick={() => router.back()}
-          className="flex-1 py-4 rounded-lg font-semibold border border-[#444444] text-white"
-        >
-          BACK
-        </button>
-        <button
-          onClick={handlePlaceBet}
-          disabled={!canProceed}
-          style={{ backgroundColor: canProceed ? accentColor : '#444444' }}
-          className={`flex-1 py-4 rounded-lg font-semibold ${canProceed ? 'text-white' : 'text-[#666666]'}`}
-        >
-          PLACE BET
-        </button>
+        <div className="flex gap-3">
+          <button
+            onClick={() => router.back()}
+            className="flex-1 py-3 rounded-lg font-semibold text-sm border border-[#444] text-white"
+          >
+            BACK
+          </button>
+          <button
+            onClick={handlePlaceBet}
+            disabled={!canProceed}
+            style={{ backgroundColor: canProceed ? accentColor : '#333' }}
+            className={`flex-1 py-3 rounded-lg font-semibold text-sm ${canProceed ? 'text-white' : 'text-[#666]'}`}
+          >
+            PLACE BET
+          </button>
+        </div>
       </div>
     </div>
   );
